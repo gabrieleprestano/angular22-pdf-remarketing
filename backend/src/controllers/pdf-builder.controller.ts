@@ -94,9 +94,7 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
 
         const adzMain = data.result || data;
 
-        // =======================================================
-        // 1. FOTO VETRINA (8 elementi) - PUNTA A result.fotoVetrina
-        // =======================================================
+        // Foto Vetrina (8 elements) - Points to result.fotoVetrina
         const fotoVetrinaSorgente = adzMain.fotoVetrina || [];
         const fotoVetrinaValideDalJson = fotoVetrinaSorgente.filter((f: any) =>
             f && (f.thumb || (f.url && !f.url.includes('img=undefined') && !f.url.includes('img=null')))
@@ -116,9 +114,7 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
         const fotoVetrinaHtml = utils.generatePhotoGridHtml(fotoVetrinaNormalizzate, 8);
 
 
-        // =======================================================
-        // 2. ALTRI ELEMENTI (12 elementi) - PUNTA A result.altriElementi
-        // =======================================================
+        // Altri Elementi (12 elements) - Points to result.altriElementi
         const altriElementiSorgente = adzMain.altriElementi || [];
         const altriElementiValidiDalJson = altriElementiSorgente.filter((f: any) =>
             f && (f.thumb || (f.url && !f.url.includes('img=undefined') && !f.url.includes('img=null')))
@@ -137,9 +133,7 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
         const altriElementiHtml = utils.generatePhotoGridHtml(altriElementiNormalizzati, 12);
 
 
-        // =======================================================
-        // 3. DOCUMENTI (2 elementi) - PUNTA A result.documenti
-        // =======================================================
+        // Documenti (2 elements) - Points to result.documenti
         const documentiSorgente = adzMain.documenti || [];
         const documentiValidiDalJson = documentiSorgente.filter((f: any) =>
             f && (f.thumb || (f.url && !f.url.includes('img=undefined') && !f.url.includes('img=null')))
@@ -158,7 +152,7 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
         const documentiHtml = utils.generatePhotoGridHtml(documentiNormalizzati, 2);
 
 
-        // Copertina principale (usa la prima foto valida della vetrina della macchina)
+        // Main photo for the report, taken from the first valid photo in the 'fotoVetrina' array or undefined if none are available
         const fotoPrincipaleUrl = fotoVetrinaNormalizzate[0] || undefined;
 
         // Replacements for placeholders in the HTML template
