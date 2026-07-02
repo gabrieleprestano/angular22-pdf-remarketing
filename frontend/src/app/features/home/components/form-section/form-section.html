@@ -1,0 +1,1493 @@
+<section aria-label="Form Section" class="py-7 text-black">
+  <app-container>
+    <!-- Form Header -->
+    <div class="flex flex-col gap-1">
+      <h3 class="text-xl font-medium tracking-wide">Compila la perizia o carica un file JSON</h3>
+      <p class="text-muted-foreground">
+        Tutti i campi contrassegnati con <span class="text-primary font-medium">*</span> sono
+        obbligatori.
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form
+      [formGroup]="reportDataForm"
+      class="grid grid-cols-1 gap-y-5 mt-5 md:mt-8 lg:mt-10 max-w-7xl mx-auto"
+    >
+      <!-- Heading Section -->
+      <div class="form-section" aria-label="Heading Section">
+        <!-- Header -->
+        <app-form-header [sectionTitle]="'Intestazione'" />
+
+        <!-- Section Fields -->
+        <div class="grid grid-cols-2 xl:grid-cols-4 gap-3 p-3 mt-3 w-full">
+          <!-- Numero Perizia Field Wrapper -->
+          <div class="flex flex-col gap-1">
+            <label for="perizia-nr" class="section-field_label"
+              >Nr. Perizia <span class="text-primary font-medium">*</span></label
+            >
+            <input
+              type="text"
+              inputmode="text"
+              id="perizia-nr"
+              name="perizia-nr"
+              placeholder="es. 7065"
+              class="section-field_input"
+              formControlName="periziaNr"
+            />
+
+            <small class="error-message">
+              {{ showErrors('periziaNr') }}
+            </small>
+          </div>
+
+          <!-- Targa Field Wrapper -->
+          <div class="flex flex-col gap-1 w-full">
+            <label for="targa" class="section-field_label"
+              >Targa <span class="text-primary font-medium">*</span></label
+            >
+            <input
+              type="text"
+              inputmode="text"
+              id="targa"
+              name="targa"
+              placeholder="AB123CD"
+              class="section-field_input"
+              formControlName="targa"
+            />
+
+            <small class="error-message">
+              {{ showErrors('targa') }}
+            </small>
+          </div>
+
+          <!-- Località Field Wrapper -->
+          <div class="flex flex-col gap-1 col-span-2 sm:col-span-1 w-full">
+            <label for="localita" class="section-field_label"
+              >Località <span class="text-primary font-medium">*</span></label
+            >
+            <input
+              type="text"
+              inputmode="text"
+              id="localita"
+              name="localita"
+              placeholder="Sede Milano (Hub 2)"
+              class="section-field_input"
+              formControlName="localita"
+            />
+
+            <small class="error-message">
+              {{ showErrors('localita') }}
+            </small>
+          </div>
+
+          <!-- Primo Rilievo Field Wrapper -->
+          <div class="flex flex-col gap-1 col-span-2 sm:col-span-1 w-full">
+            <label for="primo-rilievo" class="section-field_label"
+              >Primo Rilievo <span class="text-primary font-medium">*</span></label
+            >
+            <input
+              type="text"
+              inputmode="text"
+              id="primo-rilievo"
+              name="primo-rilievo"
+              placeholder="es. 12/11/2023"
+              class="section-field_input"
+              formControlName="primoRilievo"
+            />
+
+            <small class="error-message">
+              {{ showErrors('primoRilievo') }}
+            </small>
+          </div>
+
+          <!-- Data Incarico Field Wrapper -->
+          <div class="flex flex-col gap-1 col-span-2 sm:col-span-1 w-full">
+            <label for="data-incarico" class="section-field_label"
+              >Data di incarico <span class="text-primary font-medium">*</span></label
+            >
+            <input
+              type="text"
+              inputmode="text"
+              id="data-incarico"
+              name="data-incarico"
+              placeholder="es. 10/11/2021"
+              class="section-field_input"
+              formControlName="dataIncarico"
+            />
+
+            <small class="error-message">
+              {{ showErrors('dataIncarico') }}
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vehicle Data Section -->
+      <div class="form-section" aria-label="Vehicle Data Section">
+        <!-- Header -->
+        <app-form-header [sectionTitle]="'Dati Veicolo'" />
+
+        <!-- Section Fields -->
+        <div class="grid grid-cols-1 gap-3 p-3 mt-3 w-full">
+          <!-- Left Fields -->
+          <div class="grid grid-cols-2 gap-3 w-full">
+            <!-- Modello Field Wrapper -->
+            <div class="flex flex-col gap-1 col-span-2 sm:col-span-1">
+              <label for="modello" class="section-field_label"
+                >Modello <span class="text-primary font-medium">*</span></label
+              >
+              <input
+                type="text"
+                inputmode="text"
+                id="modello"
+                name="modello"
+                placeholder="Audi Q3 Sportback 35"
+                class="section-field_input"
+                formControlName="modello"
+              />
+
+              <small class="error-message">
+                {{ showErrors('modello') }}
+              </small>
+            </div>
+
+            <!-- Telaio (VIN) Field Wrapper -->
+            <div class="flex flex-col gap-1 col-span-2 sm:col-span-1">
+              <label for="telaio" class="section-field_label"
+                >Telaio (VIN) <span class="text-primary font-medium">*</span></label
+              >
+              <input
+                type="text"
+                inputmode="text"
+                id="telaio"
+                name="telaio"
+                placeholder="WAUZZZ8V0KA123456"
+                class="section-field_input"
+                formControlName="telaio"
+              />
+
+              <small class="error-message">
+                {{ showErrors('telaio') }}
+              </small>
+            </div>
+
+            <!-- Cilindrata Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="cilindrata" class="section-field_label">Cilindrata</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="cilindrata"
+                name="cilindrata"
+                placeholder="2000 cc"
+                class="section-field_input"
+                formControlName="cilindrata"
+              />
+
+              <small class="error-message">
+                {{ showErrors('cilindrata') }}
+              </small>
+            </div>
+
+            <!-- Potenza Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="potenza" class="section-field_label">Potenza</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="potenza"
+                name="potenza"
+                placeholder="150 CV"
+                class="section-field_input"
+                formControlName="potenza"
+              />
+
+              <small class="error-message">
+                {{ showErrors('potenza') }}
+              </small>
+            </div>
+
+            <!-- KM Attuali Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="actuals_kms" class="section-field_label">KM Attuali</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="actuals_kms"
+                name="actuals_kms"
+                placeholder="34.120 km"
+                class="section-field_input"
+                formControlName="km"
+              />
+
+              <small class="error-message">
+                {{ showErrors('km') }}
+              </small>
+            </div>
+
+            <!-- Cavalli Fiscali Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="fiscal_horses" class="section-field_label">Cavalli Fiscali</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="fiscal_horses"
+                name="fiscal_horses"
+                placeholder="10 CV"
+                class="section-field_input"
+                formControlName="cavalliFiscali"
+              />
+
+              <small class="error-message">
+                {{ showErrors('cavalliFiscali') }}
+              </small>
+            </div>
+          </div>
+
+          <!-- Right Fields -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
+            <!-- Categoria Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="categoria" class="section-field_label">Categoria</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="categoria"
+                name="categoria"
+                placeholder="Crossover"
+                class="section-field_input"
+                formControlName="categoria"
+              />
+
+              <small class="error-message">
+                {{ showErrors('categoria') }}
+              </small>
+            </div>
+
+            <!-- Version Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="versione" class="section-field_label">Versione</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="versione"
+                name="versione"
+                placeholder="S line 35 TDI S tronic"
+                class="section-field_input"
+                formControlName="versione"
+              />
+
+              <small class="error-message">
+                {{ showErrors('versione') }}
+              </small>
+            </div>
+
+            <!-- Color Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="colore" class="section-field_label">Colore</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="colore"
+                name="colore"
+                placeholder="Grigio"
+                class="section-field_input"
+                formControlName="colore"
+              />
+
+              <small class="error-message">
+                {{ showErrors('colore') }}
+              </small>
+            </div>
+
+            <!-- 1 Immatricolazione Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="immatricolazione" class="section-field_label">1a Immatricolazione</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="immatricolazione"
+                name="immatricolazione"
+                placeholder="2023"
+                class="section-field_input"
+                formControlName="immatricolazione"
+              />
+
+              <small class="error-message">
+                {{ showErrors('immatricolazione') }}
+              </small>
+            </div>
+
+            <!-- Alimentazione Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="alimentazione" class="section-field_label">Alimentazione</label>
+              <select
+                id="alimentazione"
+                name="alimentazione"
+                class="section-field_input"
+                formControlName="alimentazione"
+              >
+                <option value="">Seleziona</option>
+                <option value="benzina">Benzina</option>
+                <option value="diesel">Diesel</option>
+                <option value="elettrica">Elettrica</option>
+                <option value="ibrida">Ibrida</option>
+              </select>
+            </div>
+
+            <!-- CO2 (G/KM) Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="co2" class="section-field_label">CO2 (G/KM)</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="co2"
+                name="co2"
+                placeholder="120"
+                class="section-field_input"
+                formControlName="co2"
+              />
+
+              <small class="error-message">
+                {{ showErrors('co2') }}
+              </small>
+            </div>
+
+            <!-- Consumo Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="consumo" class="section-field_label">Consumo</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="consumo"
+                name="consumo"
+                placeholder="8"
+                class="section-field_input"
+                formControlName="consumo"
+              />
+
+              <small class="error-message">
+                {{ showErrors('consumo') }}
+              </small>
+            </div>
+
+            <!-- Listino Field Wrapper -->
+            <div class="flex flex-col gap-1">
+              <label for="listino" class="section-field_label">Listino (€)</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="listino"
+                name="listino"
+                placeholder="48.900"
+                class="section-field_input"
+                formControlName="listino"
+              />
+
+              <small class="error-message">
+                {{ showErrors('listino') }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tyre Section -->
+      <div class="flex flex-col w-full border border-border rounded-t-lg" aria-label="Tyre Section">
+        <!-- Header -->
+        <app-form-header [sectionTitle]="'Treno Pneumatici'" />
+
+        <!-- Section Fields -->
+        <div class="grid grid-cols-1 gap-3 p-3 mt-3 w-full">
+          <div formGroupName="pneumatici" class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+            <!-- Anteriore Sinistro Field Wrapper -->
+            <div class="flex flex-col gap-1 col-span-2 xl:col-span-1">
+              <label for="anteriore-sinistro" class="section-field_label">Anteriore sinistro</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="anteriore-sinistro"
+                name="anteriore-sinistro"
+                placeholder="230/45 R18 6mm"
+                class="section-field_input"
+                formControlName="antSx"
+              />
+
+              <small class="error-message">
+                {{ showErrors('antSx') }}
+              </small>
+            </div>
+
+            <!-- Anteriore Destro Field Wrapper -->
+            <div class="flex flex-col gap-1 col-span-2 xl:col-span-1">
+              <label for="anteriore-destro" class="section-field_label">Anteriore destro</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="anteriore-destro"
+                name="anteriore-destro"
+                placeholder="230/45 R18 6mm"
+                class="section-field_input"
+                formControlName="antDx"
+              />
+
+              <small class="error-message">
+                {{ showErrors('antDx') }}
+              </small>
+            </div>
+
+            <!-- Posteriore Sinistro Field Wrapper -->
+            <div class="flex flex-col gap-1 col-span-2 xl:col-span-1">
+              <label for="posteriore-sinistro" class="section-field_label"
+                >Posteriore sinistro</label
+              >
+              <input
+                type="text"
+                inputmode="text"
+                id="posteriore-sinistro"
+                name="posteriore-sinistro"
+                placeholder="230/45 R18 6mm"
+                class="section-field_input"
+                formControlName="postSx"
+              />
+
+              <small class="error-message">
+                {{ showErrors('postSx') }}
+              </small>
+            </div>
+
+            <!-- Posteriore Destro Field Wrapper -->
+            <div class="flex flex-col gap-1 col-span-2 xl:col-span-1">
+              <label for="posteriore-destro" class="section-field_label">Posteriore destro</label>
+              <input
+                type="text"
+                inputmode="text"
+                id="posteriore-destro"
+                name="posteriore-destro"
+                placeholder="230/45 R18 6mm"
+                class="section-field_input"
+                formControlName="postDx"
+              />
+
+              <small class="error-message">
+                {{ showErrors('postDx') }}
+              </small>
+            </div>
+          </div>
+
+          <!-- Tipo Pneumatici Field Wrapper -->
+          <div class="flex flex-col gap-1 col-span-2 sm:col-span-full">
+            <label for="tipo-pneumatico" class="section-field_label">Tipo pneumatici</label>
+            <select
+              id="tipo-pneumatico"
+              name="tipo-pneumatico"
+              class="section-field_input"
+              formControlName="tipoPneumatico"
+            >
+              <option value="">Seleziona tipo</option>
+              <option value="Estivo">Estivi</option>
+              <option value="Winter">Invernali</option>
+              <option value="All Season">Quattro stagioni</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Return Checks Section -->
+      <div class="form-section" aria-label="Return Checks Section">
+        <!-- Header -->
+        <app-form-header [sectionTitle]="'Controlli al rientro'" />
+
+        <!-- Section Fields -->
+        <div class="grid grid-cols-1 gap-3 p-3 mt-3 w-full">
+          <div
+            formArrayName="controlliAlRientro"
+            class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 w-full"
+          >
+            <div class="flex flex-col gap-3">
+              @for (controllo of controlliAlRientroControls.slice(0, 6); track $index) {
+                <div [formGroupName]="$index" class="flex items-center justify-between gap-2">
+                  <label [for]="'controllo-' + $index" class="text-sm text-muted-foreground">
+                    {{ controllo.get('voce')?.value }}
+                  </label>
+
+                  <input
+                    type="checkbox"
+                    [id]="'controllo-' + $index"
+                    formControlName="conforme"
+                    class="size-5 text-primary border-gray-300 rounded outline-0"
+                  />
+                </div>
+              }
+            </div>
+
+            <div class="flex flex-col gap-3">
+              @for (controllo of controlliAlRientroControls.slice(6); track $index) {
+                <div [formGroupName]="$index + 6" class="flex items-center justify-between gap-2">
+                  <label [for]="'controllo-' + ($index + 6)" class="text-sm text-muted-foreground">
+                    {{ controllo.get('voce')?.value }}
+                  </label>
+
+                  <input
+                    type="checkbox"
+                    [id]="'controllo-' + ($index + 6)"
+                    formControlName="conforme"
+                    class="size-5 text-primary border-gray-300 rounded outline-0"
+                  />
+                </div>
+              }
+            </div>
+          </div>
+
+          <small class="flex items-center gap-1.5 text-sm text-muted-foreground mt-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-circle-check-icon lucide-circle-check stroke-green-500"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+
+            Selezionare i controlli conformi</small
+          >
+        </div>
+      </div>
+
+      <!-- Damages Valutation Section -->
+      <div class="form-section" aria-label="Damages Valuation Section" formArrayName="danniVeicolo">
+        <app-form-header [sectionTitle]="'Valutazione Danni'" />
+
+        <div class="grid grid-cols-1 gap-3 p-3 w-full" [class.mt-3]="vehiclesDamages().length > 0">
+          <div class="flex flex-col w-full gap-4 max-h-96 overflow-y-auto">
+            @for (dannoGroup of vehiclesDamages(); track $index) {
+              <div class="border border-border rounded-lg p-3 bg-white/2">
+                <!-- Actions -->
+                <div
+                  class="flex justify-between items-center text-primary font-bold mb-3 border-b border-border pb-2"
+                >
+                  <!-- Remove Damage Button -->
+                  <button
+                    type="button"
+                    [attr.aria-label]="'Remove Damage ' + ($index + 1)"
+                    class="text-red-500 hover:text-red-600 font-semibold text-xs uppercase tracking-wider transition-colors duration-200"
+                    (click)="removeDanno($index)"
+                  >
+                    Rimuovi
+                  </button>
+                </div>
+
+                <!-- Damage Details / Body -->
+                <div
+                  [formGroupName]="$index"
+                  class="grid grid-cols-1 sm:grid-cols-2 items-start gap-3 w-full"
+                >
+                  <!-- Left Side -->
+                  <div class="grid grid-cols-4 gap-3 w-full">
+                    <!-- Damage Code -->
+                    <div class="flex flex-col gap-1 col-span-full sm:col-span-2">
+                      <label [for]="'cr-' + $index" class="section-field_label"
+                        >Codice (C.R.)</label
+                      >
+                      <input
+                        type="text"
+                        inputmode="text"
+                        [name]="'cr-' + $index"
+                        [id]="'cr-' + $index"
+                        placeholder="es. CR-01"
+                        class="section-field_input"
+                        formControlName="cr"
+                      />
+
+                      <small class="error-message">
+                        {{ showErrors('cr') }}
+                      </small>
+                    </div>
+
+                    <!-- Car Part (Voce) -->
+                    <div class="flex flex-col gap-1 col-span-full sm:col-span-2">
+                      <label [for]="'voce-' + $index" class="section-field_label"
+                        >Voce di danno</label
+                      >
+                      <input
+                        type="text"
+                        inputmode="text"
+                        [name]="'voce-' + $index"
+                        [id]="'voce-' + $index"
+                        placeholder="Paraurti Ant."
+                        class="section-field_input"
+                        formControlName="voce"
+                      />
+
+                      <small class="error-message">
+                        {{ showErrors('voce') }}
+                      </small>
+                    </div>
+
+                    <!-- Operation Type -->
+                    <div class="flex flex-col gap-1 col-span-full">
+                      <label [for]="'tipoOp-' + $index" class="section-field_label"
+                        >Tipo Operazione</label
+                      >
+                      <select
+                        [name]="'tipoOp-' + $index"
+                        [id]="'tipoOp-' + $index"
+                        class="section-field_input"
+                        formControlName="tipoOp"
+                      >
+                        <option value="Verniciatura">Verniciatura</option>
+                        <option value="Sostituzione">Sostituzione</option>
+                      </select>
+                    </div>
+
+                    <!-- Damage Photo (File) -->
+                    <div class="flex flex-col gap-1 col-span-full">
+                      <label [for]="'damage-pic-' + $index" class="section-field_label"
+                        >Foto Danno</label
+                      >
+                      <input
+                        type="file"
+                        [id]="'damage-pic-' + $index"
+                        (change)="onDamagePicSelected($event, $index)"
+                        accept="image/*"
+                        class="text-sm text-muted-foreground file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:transition-colors file:duration-200 cursor-pointer"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Right Side -->
+                  <div class="grid grid-cols-5 gap-3 w-full">
+                    <!-- SR -->
+                    <div class="flex flex-col gap-1 col-span-1">
+                      <label [for]="'sr-' + $index" class="section-field_label">SR</label>
+                      <input
+                        type="text"
+                        inputmode="text"
+                        [name]="'sr-' + $index"
+                        [id]="'sr-' + $index"
+                        placeholder="1,20"
+                        minlength="1"
+                        maxlength="4"
+                        class="section-field_input"
+                        formControlName="sr"
+                      />
+
+                      <small class="error-message">
+                        {{ showErrors('sr') }}
+                      </small>
+                    </div>
+
+                    <!-- LA -->
+                    <div class="flex flex-col gap-1 col-span-1">
+                      <label [for]="'la-' + $index" class="section-field_label">LA</label>
+                      <input
+                        type="text"
+                        inputmode="text"
+                        [name]="'la-' + $index"
+                        [id]="'la-' + $index"
+                        formControlName="la"
+                        placeholder="L"
+                        class="section-field_input"
+                        minlength="1"
+                        maxlength="1"
+                      />
+
+                      <small class="error-message">
+                        {{ showErrors('la') }}
+                      </small>
+                    </div>
+
+                    <!-- VE -->
+                    <div class="flex flex-col gap-1 col-span-1">
+                      <label [for]="'ve-' + $index" class="section-field_label">VE</label>
+                      <input
+                        type="text"
+                        inputmode="text"
+                        [name]="'ve-' + $index"
+                        [id]="'ve-' + $index"
+                        formControlName="ve"
+                        placeholder="L"
+                        class="section-field_input"
+                        minlength="1"
+                        maxlength="1"
+                      />
+
+                      <small class="error-message">
+                        {{ showErrors('ve') }}
+                      </small>
+                    </div>
+
+                    <!-- ME -->
+                    <div class="flex flex-col gap-1 col-span-1">
+                      <label [for]="'me-' + $index" class="section-field_label">ME</label>
+                      <input
+                        type="text"
+                        inputmode="text"
+                        [name]="'me-' + $index"
+                        [id]="'me-' + $index"
+                        placeholder="G"
+                        class="section-field_input"
+                        formControlName="me"
+                        minlength="1"
+                        maxlength="1"
+                      />
+
+                      <small class="text-sm text-red-500 font-medium">
+                        {{ showErrors('me') }}
+                      </small>
+                    </div>
+
+                    <!-- D.M -->
+                    <div class="flex flex-col gap-1 col-span-1">
+                      <label [for]="'dm-' + $index" class="section-field_label">D.M</label>
+                      <input
+                        type="text"
+                        inputmode="text"
+                        [name]="'dm-' + $index"
+                        [id]="'dm-' + $index"
+                        placeholder="1,50"
+                        class="section-field_input"
+                        minlength="1"
+                        maxlength="4"
+                        formControlName="dm"
+                      />
+
+                      <small class="error-message">
+                        {{ showErrors('dm') }}
+                      </small>
+                    </div>
+
+                    <!-- Cost -->
+                    <div class="flex flex-col gap-1 col-span-full">
+                      <label [for]="'costo-' + $index" class="section-field_label"
+                        >Costo Ric.</label
+                      >
+                      <input
+                        type="text"
+                        inputmode="decimal"
+                        [name]="'costo-' + $index"
+                        [id]="'costo-' + $index"
+                        placeholder="890,50"
+                        class="section-field_input"
+                        formControlName="costo"
+                      />
+
+                      <small class="error-message">
+                        {{ showErrors('costo') }}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <button
+            type="button"
+            aria-label="Add Damage"
+            class="inline-flex items-center w-max gap-1 px-4 py-2 text-sm font-secondary bg-transparent border border-muted-foreground text-muted-foreground rounded-md hover:bg-muted-foreground/10 transition-colors duration-200 ease-in-out"
+            (click)="addDanno()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-plus-icon lucide-plus"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+
+            Aggiungi danno
+          </button>
+        </div>
+      </div>
+
+      <!-- Fascia Carrozzeria e Supplementi Section -->
+      <div class="form-section" aria-label="Bodywork Section">
+        <app-form-header [sectionTitle]="'Fascia Carrozzeria e Supplementi'" />
+
+        <div class="grid grid-cols-1 gap-3 p-3 mt-3 w-full">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 w-full">
+            <!-- Left side -->
+
+            <div class="grid grid-cols-4 gap-3 w-full">
+              <!-- Fascia Tempi -->
+              <div class="flex flex-col gap-1 col-span-full sm:col-span-2">
+                <label for="fascia-tempi" class="section-field_label">Fascia Tempi</label>
+                <input
+                  type="text"
+                  inputmode="text"
+                  id="fascia-tempi"
+                  name="fascia-tempi"
+                  placeholder="es. 4.80 / 0,80 / 2,10"
+                  class="section-field_input"
+                  formControlName="fasciaTempi"
+                />
+
+                <small class="error-message">
+                  {{ showErrors('fasciaTempi') }}
+                </small>
+              </div>
+
+              <!-- Totale Ricambi -->
+              <div class="flex flex-col gap-1 col-span-2">
+                <label for="totale-ricambi" class="section-field_label">Totale Ricambi (€)</label>
+                <input
+                  type="text"
+                  inputmode="text"
+                  id="totale-ricambi"
+                  name="totale-ricambi"
+                  placeholder="es. 890,50"
+                  class="section-field_input"
+                  formControlName="totaleRicambi"
+                />
+
+                <small class="error-message">
+                  {{ showErrors('totaleRicambi') }}
+                </small>
+              </div>
+
+              <!-- Tempo Verniciatura -->
+              <div class="flex flex-col gap-1 col-span-2">
+                <label for="tempo-verniciatura" class="section-field_label"
+                  >Tempo Verniciatura</label
+                >
+                <input
+                  type="text"
+                  inputmode="text"
+                  id="tempo-verniciatura"
+                  name="tempo-verniciatura"
+                  placeholder="es. 4,50"
+                  class="section-field_input"
+                  formControlName="tempoVerniciatura"
+                />
+
+                <small class="error-message">
+                  {{ showErrors('tempoVerniciatura') }}
+                </small>
+              </div>
+
+              <!-- Totale Tempi Supplementi -->
+              <div class="flex flex-col gap-1 col-span-full sm:col-span-2">
+                <label for="totale-tempi-supplementi" class="section-field_label"
+                  >Tot. Tempi Supplementi</label
+                >
+                <input
+                  type="text"
+                  inputmode="text"
+                  id="totale-tempi-supplementi"
+                  name="totale-tempi-supplementi"
+                  placeholder="es. 2,55"
+                  class="section-field_input"
+                  formControlName="totTempiSuppl"
+                />
+
+                <small class="error-message">
+                  {{ showErrors('totTempiSuppl') }}
+                </small>
+              </div>
+            </div>
+
+            <!-- Right side -->
+
+            <div class="grid grid-cols-3 sm:grid-cols-2 gap-3 w-full">
+              <!-- Suppl. doppio strato -->
+              <div class="flex flex-col gap-1 col-span-full sm:col-span-1">
+                <label for="suppl-doppio-strato" class="section-field_label"
+                  >Suppl. Doppio Strato</label
+                >
+                <input
+                  type="text"
+                  inputmode="text"
+                  id="suppl-doppio-strato"
+                  name="suppl-doppio-strato"
+                  placeholder="es. 0,50"
+                  class="section-field_input"
+                  formControlName="supplDoppioStrato"
+                />
+
+                <small class="error-message">
+                  {{ showErrors('supplDoppioStrato') }}
+                </small>
+              </div>
+
+              <!-- Suppl. Finitura -->
+              <div class="flex flex-col gap-1 col-span-full sm:col-span-1">
+                <label for="suppl-finitura" class="section-field_label">Suppl. Finitura</label>
+                <input
+                  type="text"
+                  inputmode="text"
+                  id="suppl-finitura"
+                  name="suppl-finitura"
+                  placeholder="es. 0,25"
+                  class="section-field_input"
+                  formControlName="supplFinitura"
+                />
+
+                <small class="error-message">
+                  {{ showErrors('supplFinitura') }}
+                </small>
+              </div>
+
+              <!-- Totale Tempi Verniciatura -->
+              <div class="flex flex-col gap-1 col-span-full sm:col-span-2">
+                <label for="totale-tempi-verniciatura" class="section-field_label"
+                  >Tot. Tempi Verniciatura</label
+                >
+                <input
+                  type="text"
+                  inputmode="text"
+                  id="totale-tempi-verniciatura"
+                  name="totale-tempi-verniciatura"
+                  placeholder="es. 4,50"
+                  class="section-field_input"
+                  formControlName="totTempiVe"
+                />
+
+                <small class="error-message">
+                  {{ showErrors('totTempiVe') }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Totali Finali Section -->
+      <div class="form-section" aria-label="Final Totals Section">
+        <app-form-header [sectionTitle]="'Totali Finali'" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 p-3 mt-3 w-full">
+          <!-- Ricambi (€)-->
+          <div class="flex flex-col gap-1">
+            <label for="ricambi" class="section-field_label">Ricambi (€)</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="ricambi"
+              name="ricambi"
+              placeholder="es. 890,50"
+              class="section-field_input"
+              formControlName="ricambi"
+            />
+
+            <small class="error-message">
+              {{ showErrors('ricambi') }}
+            </small>
+          </div>
+
+          <!-- Mat. Consumo (€)-->
+          <div class="flex flex-col gap-1">
+            <label for="mat-consumo" class="section-field_label">Mat. Consumo (€)</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="mat-consumo"
+              name="mat-consumo"
+              placeholder="es. 95,00"
+              class="section-field_input"
+              formControlName="matConsumo"
+            />
+
+            <small class="error-message">
+              {{ showErrors('matConsumo') }}
+            </small>
+          </div>
+
+          <!-- M.O Carrozzeria (€)-->
+          <div class="flex flex-col gap-1">
+            <label for="mo-carrozzeria" class="section-field_label">M.O Carrozzeria (€)</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="mo-carrozzeria"
+              name="mo-carrozzeria"
+              placeholder="es. 120,00"
+              class="section-field_input"
+              formControlName="moCarroz"
+            />
+
+            <small class="error-message">
+              {{ showErrors('moCarroz') }}
+            </small>
+          </div>
+
+          <!-- IVA (€)-->
+          <div class="flex flex-col gap-1">
+            <label for="iva" class="section-field_label">IVA (€)</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="iva"
+              name="iva"
+              placeholder="es. 22"
+              class="section-field_input"
+              formControlName="iva"
+            />
+
+            <small class="error-message">
+              {{ showErrors('iva') }}
+            </small>
+          </div>
+
+          <!-- Totale Danni (€)-->
+          <div class="flex flex-col gap-1">
+            <label for="totale-danni" class="section-field_label">Totale Danni (€)</label>
+            <input
+              type="text"
+              inputmode="text"
+              id="totale-danni"
+              name="totale-danni"
+              placeholder="es. 1.665,41"
+              class="section-field_input"
+              formControlName="totaleDanni"
+            />
+
+            <small class="error-message">
+              {{ showErrors('totaleDanni') }}
+            </small>
+          </div>
+        </div>
+
+        <!-- Calculations -->
+        <div
+          class="grid grid-cols-2 sm:grid-cols-5 sm:place-items-center gap-2 p-3 mt-3 w-full border-t border-border"
+        >
+          <!-- Ricambi -->
+          <div class="flex flex-col gap-1">
+            <small class="section-field_label">Ricambi</small>
+            <p class="text-xl font-medium font-secondary tracking-wide">
+              {{ convertToNumber(reportDataForm.get('ricambi')?.value) | currency: 'EUR' }}
+            </p>
+          </div>
+
+          <!-- Mat. Consumo -->
+          <div class="flex flex-col gap-1">
+            <small class="section-field_label">Mat. Consumo</small>
+            <p class="text-xl font-medium font-secondary tracking-wide">
+              {{ convertToNumber(reportDataForm.get('matConsumo')?.value) | currency: 'EUR' }}
+            </p>
+          </div>
+
+          <!-- M.O Carrozzeria -->
+          <div class="flex flex-col gap-1">
+            <small class="section-field_label">M.O Carrozzeria</small>
+            <p class="text-xl font-medium font-secondary tracking-wide">
+              {{ convertToNumber(reportDataForm.get('moCarroz')?.value) | currency: 'EUR' }}
+            </p>
+          </div>
+
+          <!-- IVA -->
+          <div class="flex flex-col gap-1">
+            <small class="section-field_label">IVA 22%</small>
+            <p class="text-xl font-medium font-secondary tracking-wide">
+              {{ convertToNumber(reportDataForm.get('iva')?.value) | currency: 'EUR' }}
+            </p>
+          </div>
+
+          <!-- TOTALE DANNI -->
+          <div class="flex flex-col gap-1 col-span-full sm:col-span-1">
+            <small class="section-field_label">TOTALE DANNI</small>
+            <p class="text-2xl xl:text-3xl text-primary font-semibold font-secondary tracking-wide">
+              {{ convertToNumber(reportDataForm.get('totaleDanni')?.value) | currency: 'EUR' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pictures Section -->
+      <div class="form-section" aria-label="Pictures Section">
+        <app-form-header [sectionTitle]="'Foto & Immagini'" />
+
+        <!-- Pictures Grids -->
+        <div class="flex flex-col gap-3 p-3 mt-3 w-full">
+          <!-- Main Vehicle Picture -->
+          <div class="flex flex-col gap-1 w-full max-w-xs">
+            <small class="section-field_label"> Foto Principale - Pagina 1 </small>
+
+            <label
+              for="foto-principale"
+              class="relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50/50 hover:bg-gray-100/70 transition-all duration-200 cursor-pointer overflow-hidden group"
+            >
+              @if (reportDataForm.get('fotoPrincipale')?.value) {
+                <img
+                  [src]="reportDataForm.get('fotoPrincipale')?.value"
+                  alt="Anteprima"
+                  class="absolute inset-0 size-full object-cover"
+                />
+
+                <span
+                  class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                >
+                  <p class="text-white text-xs font-semibold bg-black/60 px-3 py-1.5 rounded-md">
+                    Modifica Foto
+                  </p>
+                </span>
+              } @else if (isLoadingPicture()) {
+                <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center p-4">
+                  <svg
+                    class="w-8 h-8 mb-3 text-gray-400 animate-spin transition-colors"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+
+                  <p class="mb-1 text-sm text-gray-500 font-semibold">Caricamento...</p>
+                </div>
+              } @else {
+                <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center p-4">
+                  <svg
+                    class="w-8 h-8 mb-3 text-gray-400 group-hover:text-gray-500 transition-colors"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
+
+                  <p class="mb-1 text-sm text-gray-500 font-semibold">Foto Principale</p>
+                  <p class="text-xs text-gray-400">Clicca per caricare</p>
+                </div>
+              }
+            </label>
+
+            <input
+              id="foto-principale"
+              name="foto-principale"
+              type="file"
+              accept="image/*"
+              class="hidden"
+              (change)="onMainPicSelected($event)"
+            />
+          </div>
+
+          <!-- Foto Vetrina - Pagina 2 (8 elementi totali) -->
+          <div class="flex flex-col gap-1">
+            <small class="section-field_label"> Foto Vetrina - Pagina 2 </small>
+
+            <ul class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+              @for (i of [0, 1, 2, 3, 4, 5, 6, 7]; track i) {
+                <li>
+                  <label
+                    class="relative grid place-items-center h-36 w-full border-2 border-dashed border-gray-300 rounded-lg bg-gray-50/50 hover:bg-gray-100/70 transition-all duration-200 cursor-pointer overflow-hidden group"
+                    [for]="'foto-' + (i + 1)"
+                  >
+                    @let fotoArray = reportDataForm.get('fotoVetrina');
+                    @let fotoBase64 = fotoArray?.value?.[i];
+
+                    @if (isLoadingVetrinaIndices().has(i)) {
+                      <div class="flex items-center justify-center">
+                        <div
+                          class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"
+                        ></div>
+                      </div>
+                    } @else if (fotoBase64) {
+                      <img
+                        [src]="fotoBase64"
+                        alt="Anteprima"
+                        class="absolute inset-0 size-full object-cover"
+                      />
+
+                      <div
+                        class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      >
+                        <span
+                          class="text-white text-[10px] font-semibold bg-black/60 px-2 py-1 rounded"
+                        >
+                          Cambia
+                        </span>
+                      </div>
+                    } @else {
+                      <div
+                        class="flex flex-col items-center justify-center pt-5 pb-6 text-center p-4"
+                      >
+                        <svg
+                          class="w-6 h-6 mb-2 text-gray-400 group-hover:text-gray-500 transition-colors"
+                          fill="none"
+                          viewBox="0 0 20 16"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                          />
+                        </svg>
+                        <p class="text-xs text-gray-400">Foto {{ i + 1 }}</p>
+                      </div>
+                    }
+                  </label>
+
+                  <input
+                    [id]="'foto-' + (i + 1)"
+                    [name]="'foto-' + (i + 1)"
+                    type="file"
+                    accept="image/*"
+                    class="hidden"
+                    (change)="onFotoVetrinaPicSelected($event, i)"
+                  />
+                </li>
+              }
+            </ul>
+          </div>
+
+          <!-- Altri Elementi - Pagina 2 (12 elementi totali) -->
+          <div class="flex flex-col gap-1">
+            <small class="section-field_label">Altri Elementi - Pagina 2</small>
+
+            <ul class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+              @for (i of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; track i) {
+                <li>
+                  <label
+                    class="relative grid place-items-center h-36 w-full border-2 border-dashed border-gray-300 rounded-lg bg-gray-50/50 hover:bg-gray-100/70 transition-all duration-200 cursor-pointer overflow-hidden group"
+                    [for]="'elemento-' + (i + 1)"
+                  >
+                    @let fotoAltriElementiArray = reportDataForm.get('altriElementi');
+                    @let fotoBase64 = fotoAltriElementiArray?.value?.[i];
+
+                    @if (isLoadingAltriElementiIndices().has(i)) {
+                      <div class="flex items-center justify-center">
+                        <div
+                          class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"
+                        ></div>
+                      </div>
+                    } @else if (fotoBase64) {
+                      <img
+                        [src]="fotoBase64"
+                        alt="Anteprima"
+                        class="absolute inset-0 size-full object-cover"
+                      />
+
+                      <div
+                        class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      >
+                        <span
+                          class="text-white text-[10px] font-semibold bg-black/60 px-2 py-1 rounded"
+                          >Cambia</span
+                        >
+                      </div>
+                    } @else {
+                      <div
+                        class="flex flex-col items-center justify-center pt-5 pb-6 text-center p-4"
+                      >
+                        <svg
+                          class="w-6 h-6 mb-2 text-gray-400 group-hover:text-gray-500 transition-colors"
+                          fill="none"
+                          viewBox="0 0 20 16"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                          />
+                        </svg>
+                        <p class="text-xs text-gray-400">Elemento {{ i + 1 }}</p>
+                      </div>
+                    }
+                  </label>
+
+                  <input
+                    [id]="'elemento-' + (i + 1)"
+                    [name]="'elemento-' + (i + 1)"
+                    type="file"
+                    accept="image/*"
+                    class="hidden"
+                    (change)="onAltriElementiPicSelected($event, i)"
+                  />
+                </li>
+              }
+            </ul>
+          </div>
+
+          <!-- Documenti - Pagina 2 (2 elementi totali) -->
+          <div class="flex flex-col gap-1">
+            <small class="section-field_label">Documenti - Pagina 2</small>
+
+            <ul class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+              @for (i of [0, 1]; track i) {
+                <li>
+                  <label
+                    class="relative grid place-items-center h-36 w-full border-2 border-dashed border-gray-300 rounded-lg bg-gray-50/50 hover:bg-gray-100/70 transition-all duration-200 cursor-pointer overflow-hidden group"
+                    [for]="'documento-' + (i + 1)"
+                  >
+                    @let fotoDocumentiArray = reportDataForm.get('documenti');
+                    @let fotoBase64 = fotoDocumentiArray?.value?.[i];
+
+                    @if (isLoadingDocumentiIndices().has(i)) {
+                      <div class="flex items-center justify-center">
+                        <div
+                          class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"
+                        ></div>
+                      </div>
+                    } @else if (fotoBase64) {
+                      <img
+                        [src]="fotoBase64"
+                        alt="Anteprima"
+                        class="absolute inset-0 size-full object-cover"
+                      />
+
+                      <div
+                        class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      >
+                        <span
+                          class="text-white text-[10px] font-semibold bg-black/60 px-2 py-1 rounded"
+                          >Cambia</span
+                        >
+                      </div>
+                    } @else {
+                      <div
+                        class="flex flex-col items-center justify-center pt-5 pb-6 text-center p-4"
+                      >
+                        <svg
+                          class="w-6 h-6 mb-2 text-gray-400 group-hover:text-gray-500 transition-colors"
+                          fill="none"
+                          viewBox="0 0 20 16"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                          />
+                        </svg>
+                        <p class="text-xs text-gray-400">Documento {{ i + 1 }}</p>
+                      </div>
+                    }
+                  </label>
+
+                  <input
+                    [id]="'documento-' + (i + 1)"
+                    [name]="'documento-' + (i + 1)"
+                    type="file"
+                    accept="image/*"
+                    class="hidden"
+                    (change)="onDocumentiPicSelected($event, i)"
+                  />
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Footer Section -->
+      <div
+        class="flex flex-col gap-2 lg:flex-row lg:justify-between p-3 border border-border rounded-lg w-full"
+      >
+        <!-- Footer Data -->
+        <div class="flex flex-col gap-1">
+          <h3 class="text-lg lg:text-xl font-semibold">Pronto a generare la perizia?</h3>
+
+          <p class="text-sm sm:text-base text-muted-foreground">
+            Verifica che tutti i dati siano corretti prima di procedere.
+          </p>
+        </div>
+
+        <div
+          class="flex flex-col gap-1 sm:flex-row sm:justify-between lg:justify-baseline sm:gap-1"
+        >
+          <label
+            role="button"
+            class="inline-flex items-center justify-center w-full lg:w-auto text-center px-3 md:px-8 py-2.5 gap-2 text-lg font-medium bg-primary text-white rounded-md transition-colors duration-200 ease-in-out cursor-pointer"
+            aria-label="Upload JSON data"
+            >Carica JSON
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-braces-icon lucide-braces"
+            >
+              <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1" />
+              <path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1" />
+            </svg>
+
+            <input
+              type="file"
+              accept=".json"
+              class="hidden"
+              (change)="onReportDataFormJSONUpload($event)"
+            />
+          </label>
+
+          <button
+            class="inline-flex items-center justify-center w-full lg:w-auto text-center px-3 md:px-8 py-2.5 gap-2 text-lg font-medium bg-primary text-white rounded-md transition-colors duration-200 ease-in-out"
+            [ngClass]="{
+              'opacity-50 cursor-not-allowed': reportDataForm.invalid,
+            }"
+            aria-label="Generate PDF"
+            [disabled]="reportDataForm.invalid"
+            [attr.aria-disabled]="reportDataForm.invalid"
+            (click)="onReportDataFormSubmit($event)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-file-text-icon lucide-file-text"
+            >
+              <path
+                d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+              />
+              <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+              <path d="M10 9H8" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+            </svg>
+
+            Genera PDF
+          </button>
+        </div>
+      </div>
+    </form>
+  </app-container>
+</section>

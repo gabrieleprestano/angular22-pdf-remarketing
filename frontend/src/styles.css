@@ -1,0 +1,93 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #640d6b;
+  --color-bg-image: radial-gradient(
+    ellipse at center,
+    #3d2914 0%,
+    #2a1810 30%,
+    #1a0f0a 60%,
+    #0d0806 100%
+  );
+
+  --color-white: #fdfffc;
+  --color-black: #0b090a;
+
+  --color-border: #00000014;
+  --color-input: #f7f7f8;
+
+  --color-primary: #e0562d;
+  --color-secondary: #7a3a2a;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
+
+  --font-primary: 'Inter', 'Arial', sans-serif;
+  --font-secondary: 'Roboto Slab', 'Roboto', serif;
+}
+
+@layer base {
+  body {
+    color: var(--color-white);
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  ul {
+    @apply list-none;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  button,
+  textarea {
+    @apply outline-0;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  img {
+    @apply block w-full h-auto;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+  }
+}
+
+@layer components {
+  .form-section {
+    @apply flex flex-col w-full border border-border rounded-lg;
+  }
+
+  .section-field_label {
+    @apply text-sm uppercase text-muted-foreground font-secondary truncate line-clamp-1;
+  }
+
+  .section-field_input {
+    @apply border bg-input border-border rounded-md p-2 focus-within:outline-none focus-within:ring-1 focus-within:ring-primary focus-within:ring-offset-1 transition-all duration-200 ease-in-out;
+  }
+
+  .error-message {
+    @apply text-sm text-red-500 font-medium;
+  }
+}

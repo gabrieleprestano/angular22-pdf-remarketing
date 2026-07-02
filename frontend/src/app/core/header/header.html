@@ -1,0 +1,38 @@
+<header
+  class="fixed top-0 left-0 w-full z-50 bg-white drop-shadow-xl drop-shadow-muted-foreground/10"
+>
+  <app-container [className]="'flex items-center justify-between py-2 gap-2'">
+    <!-- Logo -->
+    <figure>
+      <img src="logo.webp" alt="General Group Logo" class="w-30 -translate-y-1.5" />
+    </figure>
+
+    <!-- Actions -->
+    <div class="hidden sm:flex items-center gap-2">
+      <a
+        role="button"
+        href="7065_GH398SV_report_modernizzato.pdf"
+        target="_blank"
+        class="inline-flex items-center gap-2 text-center rounded-xl px-2.5 py-1 bg-primary/70 backdrop-blur-lg text-white font-semibold text-sm transition-colors duration-300 ease-in-out hover:bg-secondary/80 group"
+        >Guarda l'anteprima
+
+        <!-- Icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-arrow-up-right-icon lucide-arrow-up-right transition-transform will-change-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1"
+        >
+          <path d="M7 7h10v10" />
+          <path d="M7 17 17 7" />
+        </svg>
+      </a>
+    </div>
+  </app-container>
+</header>

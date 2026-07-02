@@ -1,0 +1,64 @@
+<section
+  aria-label="Hero Section"
+  class="pt-28 lg:pb-14 bg-[radial-gradient(ellipse_at_center,#3d2914_0%,#2a1810_30%,#1a0f0a_60%,#0d0806_100%)]"
+>
+  <app-container [className]="'grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14'">
+    <!-- Data -->
+    <div class="flex flex-col gap-4.5 xl:gap-5">
+      <span
+        class="inline-flex items-center px-3 md:px-4 py-1.5 md:py-1 w-max text-sm md:text-base text-center gap-2 rounded-xl backdrop-blur-lg bg-secondary/40 text-primary font-medium border border-secondary"
+      >
+        <!-- PDF Icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-file-text-icon lucide-file-text"
+        >
+          <path
+            d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+          />
+          <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+          <path d="M10 9H8" />
+          <path d="M16 13H8" />
+          <path d="M16 17H8" />
+        </svg>
+
+        Generatore perizie auto
+      </span>
+
+      <h1 class="text-4xl sm:text-5xl xl:text-6xl tracking-wide line-clamp-3">
+        Genera la tua <span class="font-medium text-primary">Perizia Auto</span> in formato PDF
+      </h1>
+
+      <p class="text-muted md:text-lg tracking-wide max-w-xl">
+        Compila il modulo con tutti i dati del veicolo, i controlli, la valutazione e i danni.
+        Genera un PDF professionale in pochi secondi
+      </p>
+
+      <ul class="grid gap-y-2">
+        @for (point of points; track $index) {
+          <li class="flex items-center gap-2.5 text-sm md:text-base">
+            <div class="size-3 rounded-full bg-primary"></div>
+            {{ point }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Right Side -->
+    <figure class="relative grid place-items-center group">
+      <img
+        src="anteprima.png"
+        alt="File PDF in anteprima"
+        class="lg:absolute lg:-bottom-16 w-65 sm:w-80 md:w-85 lg:w-95 xl:w-108 object-center object-cover rounded-t-lg mask-[linear-gradient(to_bottom,white_80%,transparent_100%)] [webkit-mask-image:linear-gradient(to_bottom,white_80%,transparent_100%)] transition-transform will-change-transform duration-200 ease-in-out group-hover:scale-105"
+      />
+    </figure>
+  </app-container>
+</section>
