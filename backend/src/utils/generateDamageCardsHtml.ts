@@ -4,9 +4,11 @@ import { takeFirstValueFromObject } from "./takeFirstValueFromObject.js";
 
 export function generateDamageCardsHtml(danni: Danno[]): string {
     return danni.map(d => {
-        const fotoHtml = d.fotoDanno
+        // Se d.fotoDanno esiste ed è valido mostra l'immagine, 
+        // altrimenti mostra il box placeholder "No Photo"
+        const fotoHtml = (d.fotoDanno && d.fotoDanno.trim() !== '' && d.fotoDanno.trim() !== 'undefined' && d.fotoDanno.trim() !== 'null')
             ? `<div class="card-photo-box"><img src="${d.fotoDanno}" /></div>`
-            : '';
+            : `<div class="card-photo-box placeholder"><span>No Photo</span></div>`;
 
         return `
             <div class="damage-card">
