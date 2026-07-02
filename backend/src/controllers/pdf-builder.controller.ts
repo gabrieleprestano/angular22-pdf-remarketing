@@ -71,10 +71,15 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
         // Processing dynamic images uploaded from Angular via Multer
         const fotoPrincipaleBase64 = data.fotoPrincipale || (files?.['fotoPrincipale']?.[0] ? utils.multerFileToBase64(files['fotoPrincipale'][0]) : undefined);
 
-        // Mapping the 'fotoDanni' array files to the corresponding index in the 'danni' array
-        const danniArricchiti = (data.adz_data.adz.danni || []).map((d: Danno, index: number) => {
-            // // Check if the 'fotoDanni' field exists in the request body or in the Multer files, and convert it to Base64
-            const fotoDannoBase64 = d.fotoDanno || (files?.['fotoDanni']?.[index] ? utils.multerFileToBase64(files['fotoDanni'][index]) : undefined);
+        // Mapping over the 'danni' array to enrich each damage entry with its corresponding photo in Base64 format
+        const danniArricchiti = (data.adz_data.adz.danni || []).map((d: Danno) => {
+            // Finding the corresponding file in the Multer files array based on the 'codice_ricambio' of the damage entry
+            const fileFisico = files?.['fotoDanni']?.find(f =>
+                f.originalname.includes(d.codice_ricambio)
+            );
+
+            // If a photo is found, convert it to Base64; otherwise, use the existing 'fotoDanno' from the JSON data or leave it undefined
+            const fotoDannoBase64 = d.fotoDanno || (fileFisico ? utils.multerFileToBase64(fileFisico) : undefined);
 
             return {
                 ...d,
@@ -87,24 +92,74 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
         const tabellaDanniHtml = utils.generateDanniTableRows(danniArricchiti);
         const damageCardsHtml = utils.generateDamageCardsHtml(danniArricchiti);
 
-        // Foto Vetrina (8 elements)
+        const adzMain = data.result || data;
+
+        // =======================================================
+        // 1. FOTO VETRINA (8 elementi) - PUNTA A result.fotoVetrina
+        // =======================================================
+        const fotoVetrinaSorgente = adzMain.fotoVetrina || [];
+        const fotoVetrinaValideDalJson = fotoVetrinaSorgente.filter((f: any) =>
+            f && (f.thumb || (f.url && !f.url.includes('img=undefined') && !f.url.includes('img=null')))
+        );
+
         const fotoVetrinaNormalizzate: (string | undefined)[] = Array(8).fill(undefined).map((_, i) => {
-            // First check in the Angular JSON data (careful with the correct key 'fotoVetrina'), then in Multer files
-            return data.fotoVetrina?.[i] || (files?.['fotoVetrina']?.[i] ? utils.multerFileToBase64(files['fotoVetrina'][i]) : undefined);
+            const fotoJson = fotoVetrinaValideDalJson[i];
+            if (fotoJson) {
+                // Prende prima il base64 (thumb) se c'è, altrimenti l'URL remoto
+                return fotoJson.thumb || fotoJson.url;
+            }
+            if (files?.['fotoVetrina']?.[i]) {
+                return utils.multerFileToBase64(files['fotoVetrina'][i]);
+            }
+            return undefined;
         });
         const fotoVetrinaHtml = utils.generatePhotoGridHtml(fotoVetrinaNormalizzate, 8);
 
-        // Altri Elementi (12 elements)
+
+        // =======================================================
+        // 2. ALTRI ELEMENTI (12 elementi) - PUNTA A result.altriElementi
+        // =======================================================
+        const altriElementiSorgente = adzMain.altriElementi || [];
+        const altriElementiValidiDalJson = altriElementiSorgente.filter((f: any) =>
+            f && (f.thumb || (f.url && !f.url.includes('img=undefined') && !f.url.includes('img=null')))
+        );
+
         const altriElementiNormalizzati: (string | undefined)[] = Array(12).fill(undefined).map((_, i) => {
-            return data.altriElementi?.[i] || (files?.['altriElementi']?.[i] ? utils.multerFileToBase64(files['altriElementi'][i]) : undefined);
+            const fotoJson = altriElementiValidiDalJson[i];
+            if (fotoJson) {
+                return fotoJson.thumb || fotoJson.url;
+            }
+            if (files?.['altriElementi']?.[i]) {
+                return utils.multerFileToBase64(files['altriElementi'][i]);
+            }
+            return undefined;
         });
         const altriElementiHtml = utils.generatePhotoGridHtml(altriElementiNormalizzati, 12);
 
-        // Documenti (2 elements)
+
+        // =======================================================
+        // 3. DOCUMENTI (2 elementi) - PUNTA A result.documenti
+        // =======================================================
+        const documentiSorgente = adzMain.documenti || [];
+        const documentiValidiDalJson = documentiSorgente.filter((f: any) =>
+            f && (f.thumb || (f.url && !f.url.includes('img=undefined') && !f.url.includes('img=null')))
+        );
+
         const documentiNormalizzati: (string | undefined)[] = Array(2).fill(undefined).map((_, i) => {
-            return data.documenti?.[i] || (files?.['documenti']?.[i] ? utils.multerFileToBase64(files['documenti'][i]) : undefined);
+            const fotoJson = documentiValidiDalJson[i];
+            if (fotoJson) {
+                return fotoJson.thumb || fotoJson.url;
+            }
+            if (files?.['documenti']?.[i]) {
+                return utils.multerFileToBase64(files['documenti'][i]);
+            }
+            return undefined;
         });
         const documentiHtml = utils.generatePhotoGridHtml(documentiNormalizzati, 2);
+
+
+        // Copertina principale (usa la prima foto valida della vetrina della macchina)
+        const fotoPrincipaleUrl = fotoVetrinaNormalizzate[0] || undefined;
 
         // Replacements for placeholders in the HTML template
         const rimpiazzi: Record<string, string> = {
@@ -172,7 +227,7 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
             totaleDanni: utils.formatDecimal(data.adz_data.adz.totale_sinistra) || '—',
 
             // Blocchi di codice HTML generati dinamicamente
-            fotoPrincipale: fotoPrincipaleBase64 || 'https://via.placeholder.com/175x130?text=Manca+Foto',
+            fotoPrincipale: fotoPrincipaleUrl || 'https://via.placeholder.com/175x130?text=Manca+Foto',
             BLOCCO_CONTROLLI: controlliHtml,
             RIGHE_TABELLA_DANNI: tabellaDanniHtml,
             FOTO_VETRINA_GRID: fotoVetrinaHtml,
@@ -187,10 +242,14 @@ export const generatePdf = async (req: Request, res: Response): Promise<void> =>
         }
 
         // Puppeteer to generate the PDF from the final HTML content
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
         const page = await browser.newPage();
 
         await page.setContent(htmlContent, { waitUntil: 'domcontentloaded' });
+        await page.waitForNetworkIdle({ idleTime: 500, concurrency: 0 });
 
         const marginPositions = {
             top: '0',
